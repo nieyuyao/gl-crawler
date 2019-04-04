@@ -1,0 +1,29 @@
+{
+  "name": "crawl-webgl",
+  "version": "1.0.0",
+  "description": "爬取MDN上关于webgl上下文的方法和属性",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src --out-dir ./bin"
+  },
+  "bin": {
+    "crawg": "src/crawlg.js"
+  },
+  "keywords": [
+    "webgl-api",
+    "crawl"
+  ],
+  "author": "nie.yuyao",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.1.2",
+    "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/preset-env": "^7.4.3",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0"
+  }
+}
