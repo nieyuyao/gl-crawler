@@ -26,12 +26,12 @@ function _generate(index, hrefs, result) {
 	});
 	return request(options)
 		.then(val => {
-			console.log((index + 1) + '%');
+			console.log((Math.floor((index + 1) * 100 / hrefs.length)) + '%');
 			const $ = parse(val);
 			let desc = '';
 			let syntax = '';
 			let returnVal = '';
-			const descEle = $('#wikiArticle >p:first-child').eq(0);
+			const descEle = $('#wikiArticle > p').eq(0);
 			const syntaxEle = $('#Syntax+pre').eq(0);
 			const returnValcEle = $('#Return_value+p').eq(0);
 			if (descEle) {
