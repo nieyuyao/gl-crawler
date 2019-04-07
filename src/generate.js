@@ -30,10 +30,12 @@ function _generate(index, hrefs, result) {
 			const $ = parse(val);
 			let desc = '';
 			let syntax = '';
-			let returnVal = '';
+			let returnVal = 'None.';
+			const params = [];
 			const descEle = $('#wikiArticle > p').eq(0);
 			const syntaxEle = $('#Syntax+pre').eq(0);
 			const returnValcEle = $('#Return_value+p').eq(0);
+			const paramsEle = $('#Parameters+dl').eq(0);
 			if (descEle) {
 				desc = descEle.text();
 			}
@@ -43,9 +45,23 @@ function _generate(index, hrefs, result) {
 			if (returnValcEle) {
 				returnVal = returnValcEle.text();
 			}
+			if (paramsEle) {
+				paramsEle.find('dt').each((index, dt) => {
+					params.push({
+						paramName: $(dt).text()
+					});
+				});
+				paramsEle.find('dd').each((index, dl) => {
+					if (!params[index]) {
+						return;
+					}
+					params[index].desc = $(dl).text();
+				});
+			}
 			result.push({
 				desc,
 				syntax,
+				params,
 				returnVal,
 				url: options.host + options.path
 			});
