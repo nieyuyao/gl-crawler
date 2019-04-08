@@ -1,4 +1,5 @@
 const parse = require('./parse');
+const delEnterRegExp = /\s*\n\s*/g;
 module.exports = {
 	arrConfig: {
 		host: 'developer.mozilla.org',
@@ -22,6 +23,9 @@ module.exports = {
 			const paramsEle = $('#Parameters+dl').eq(0);
 			if (descEle) {
 				desc = descEle.text();
+				desc = desc.replace(delEnterRegExp, () => {
+					return ' ';
+				});
 			}
 			if (syntaxEle.eq(0)) {
 				syntax = syntaxEle.text();
@@ -39,7 +43,11 @@ module.exports = {
 					if (!params[index]) {
 						return;
 					}
-					params[index].desc = $(dl).text();
+					let text = $(dl).text();
+					text = text.replace(delEnterRegExp, () => {
+						return ' ';
+					});
+					params[index].desc = text;
 				});
 			}
 			return {
