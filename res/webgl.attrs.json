@@ -8,19 +8,19 @@
     "desc": "The WebGLRenderingContext.commit() method pushes frames back to the original HTMLCanvasElement, if the context is not directly fixed to a specific canvas.",
     "syntax": "void WebGLRenderingContext.commit()",
     "params": [],
-    "returnVal": "",
+    "returnVal": "None.",
     "url": "developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/commit"
 }, {
     "desc": "The read-only WebGLRenderingContext.drawingBufferWidth property represents the actual width of the current drawing buffer. It should match the width attribute of the <canvas> element associated with this context, but might differ if the implementation is not able to provide the requested width.",
     "syntax": "gl.drawingBufferWidth;",
     "params": [],
-    "returnVal": "",
+    "returnVal": "None.",
     "url": "developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawingBufferWidth"
 }, {
     "desc": "The read-only WebGLRenderingContext.drawingBufferHeight property represents the actual height of the current drawing buffer. It should match the height attribute of the <canvas> element associated with this context, but might differ if the implementation is not able to provide the requested height.",
     "syntax": "gl.drawingBufferHeight;",
     "params": [],
-    "returnVal": "",
+    "returnVal": "None.",
     "url": "developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/drawingBufferHeight"
 }, {
     "desc": "The WebGLRenderingContext.getContextAttributes() method returns a WebGLContextAttributes object that contains the actual context parameters. Might return null, if the context is lost.",
@@ -281,7 +281,7 @@
     "desc": "The WebGLRenderingContext.getError() method of the WebGL API returns error information.",
     "syntax": "GLenum gl.getError();\n",
     "params": [],
-    "returnVal": "",
+    "returnVal": "None.",
     "url": "developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/getError"
 }, {
     "desc": "The WebGLRenderingContext.hint() method of the WebGL API specifies hints for certain behaviors. The interpretation of these hints depend on the implementation.",
@@ -974,7 +974,7 @@
         "paramName": "shader",
         "desc": "A fragment or vertex WebGLShader."
     }],
-    "returnVal": "",
+    "returnVal": "None.",
     "url": "developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/attachShader"
 }, {
     "desc": "The WebGLRenderingContext.bindAttribLocation() method of the WebGL API binds a generic vertex index to an attribute variable.",
@@ -998,7 +998,7 @@
         "paramName": "shader",
         "desc": "A fragment or vertex WebGLShader."
     }],
-    "returnVal": "",
+    "returnVal": "None.",
     "url": "developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/compileShader"
 }, {
     "desc": "The WebGLRenderingContext.createProgram() method of the WebGL API creates and initializes a WebGLProgram object.",
@@ -1013,7 +1013,7 @@
         "paramName": "type",
         "desc": "Either gl.VERTEX_SHADER or gl.FRAGMENT_SHADER"
     }],
-    "returnVal": "",
+    "returnVal": "None.",
     "url": "developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/createShader"
 }, {
     "desc": "The WebGLRenderingContext.deleteProgram() method of the WebGL API deletes a given WebGLProgram object. This method has no effect if the program has already been deleted.",
@@ -1043,7 +1043,7 @@
         "paramName": "shader",
         "desc": "A fragment or vertex WebGLShader."
     }],
-    "returnVal": "",
+    "returnVal": "None.",
     "url": "developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/detachShader"
 }, {
     "desc": "The WebGLRenderingContext.getAttachedShaders() method of the WebGL API returns a list of WebGLShader objects attached to a WebGLProgram.",

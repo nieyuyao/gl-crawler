@@ -8,7 +8,10 @@ module.exports = function request(options) {
 				content += chunk;
 			});
 			res.on('end', () => {
-				resolve(content);
+				resolve({
+					config: options,
+					content: content
+				});
 			});
 			res.on('error', err => {
 				reject(err);
