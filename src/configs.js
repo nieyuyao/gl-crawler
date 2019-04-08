@@ -11,6 +11,7 @@ module.exports = {
 		fileName: 'webgl.attrs.json',
 		factory: function (config, content) {
 			const $ = parse(content);
+			let name = config.path.split('/').slice(-1)[0];
 			let desc = '';
 			let syntax = '';
 			let returnVal = 'None.';
@@ -42,6 +43,7 @@ module.exports = {
 				});
 			}
 			return {
+				name,
 				desc,
 				syntax,
 				params,
