@@ -1,5 +1,6 @@
 const parse = require('./parse');
-const delEnterRegExp = /\s*\n\s*/g;
+const delEnterRegExp = /\s*\n\s*/g; //去除多余的换行
+const funcRegExp = /\(.*\)/g;
 module.exports = {
 	arrConfig: {
 		host: 'developer.mozilla.org',
@@ -13,6 +14,7 @@ module.exports = {
 		factory: function (config, content) {
 			const $ = parse(content);
 			let name = config.path.split('/').slice(-1)[0];
+			let type = 'value';
 			let desc = '';
 			let syntax = '';
 			let returnVal = 'None.';
@@ -29,6 +31,9 @@ module.exports = {
 			}
 			if (syntaxEle.eq(0)) {
 				syntax = syntaxEle.text();
+				if (syntax.match(funcRegExp)) {
+					type = 'function';
+				}
 			}
 			if (returnValcEle) {
 				returnVal = returnValcEle.text() || returnVal;
@@ -56,6 +61,7 @@ module.exports = {
 				syntax,
 				params,
 				returnVal,
+				type,
 				url: config.host + config.path
 			};
 		}
@@ -89,6 +95,7 @@ module.exports = {
 					result.url = config.host + config.path;
 				});
 				if (result.name) {
+					result.type = 'constant';
 					data.push(result);
 				}
 			});
