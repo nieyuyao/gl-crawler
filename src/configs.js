@@ -12,6 +12,32 @@ module.exports = {
 		},
 		fileName: 'webgl.attrs.json',
 		factory: function (config, content) {
+			function splitFuncGroup(name, params, syntax, desc, returnVal, postfix, n) {
+				params = params.slice(0);
+				if (postfix.indexOf('v') > -1) {
+					params[params.length - 1].paramName = 'value';
+				} else {
+					const paramDesc = params.splice(params.length - 1, 1)[0].desc;
+					console.log(paramDesc)
+					for (let i = 1; i <= n; i++) {
+						params.push({
+							paramName: 'v' + (i-1),
+							desc: paramDesc
+						})
+					}
+				}
+				let splits = [];
+				for (let i = 1; i <= n; i++) {
+					splits.push({
+						name: name + i + postfix,
+						syntax,
+						desc,
+						params,
+						returnVal
+					});
+				}
+				return splits;
+			}
 			const $ = parse(content);
 			let name = config.path.split('/').slice(-1)[0];
 			let type = 'value';
@@ -54,6 +80,47 @@ module.exports = {
 					});
 					params[index].desc = text;
 				});
+			}
+			//特殊处理 vertexAttrib、uniformMatrix、uniform
+			if (name === 'uniform') {
+				return [
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'f', 1),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'f', 2),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'f', 3),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'f', 4),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'i', 1),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'i', 2),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'i', 3),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'i', 4),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'iv', 1),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'iv', 2),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'iv', 3),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'iv', 4),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'fv', 1),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'fv', 2),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'fv', 3),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'fv', 4)
+				]
+				
+			} else if (name === 'uniformMatrix') {
+				return [
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'fv', 1),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'fv', 2),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'fv', 3),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'fv', 4)
+				]
+			} else if (name === 'vertexAttrib') {
+				params.splice(params.length - 1, 1);
+				return [
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'f', 1),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'f', 2),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'f', 3),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'f', 4),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'fv', 1),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'fv', 2),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'fv', 3),
+					...splitFuncGroup(name, params, syntax, desc, returnVal, 'fv', 4)
+				]
 			}
 			return {
 				name,
