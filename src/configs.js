@@ -17,8 +17,7 @@ module.exports = {
 				if (postfix.indexOf('v') > -1) {
 					params[params.length - 1].paramName = 'value';
 				} else {
-					const paramDesc = params.splice(params.length - 1, 1)[0].desc;
-					console.log(paramDesc)
+					const paramDesc = params.pop().desc;
 					for (let i = 1; i <= n; i++) {
 						params.push({
 							paramName: 'v' + (i-1),
@@ -70,15 +69,39 @@ module.exports = {
 						paramName: $(dt).text()
 					});
 				});
-				paramsEle.find('dd').each((index, dl) => {
+				paramsEle.find('dd').each((index, dd) => {
 					if (!params[index]) {
 						return;
 					}
-					let text = $(dl).text();
+					let text = $(dd).text();
 					text = text.replace(delEnterRegExp, () => {
 						return ' ';
 					});
 					params[index].desc = text;
+				});
+			}
+			//特殊处理texImage2D
+			if (name === 'texImage2D') {
+				params.pop();
+				const offset = params.length;
+				const nextParamsEle = $('#wikiArticle > dl').eq(1);
+				nextParamsEle.find('dt').each((index, dt) => {
+					params.push({
+						paramName: $(dt).text()
+					});
+				});
+				nextParamsEle.find('dd').each((index, dd) => {
+					if (index === 0) {
+						return;
+					}
+					if (!params[index - 1 + offset]) {
+						return;
+					}
+					let text = $(dd).text();
+					text = text.replace(delEnterRegExp, () => {
+						return ' ';
+					});
+					params[index - 1 + offset].desc = text;
 				});
 			}
 			//特殊处理 vertexAttrib、uniformMatrix、uniform
