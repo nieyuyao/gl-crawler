@@ -6,6 +6,10 @@ on:
   push:
     branches: [ master ]
 jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+    - run: npm install
   test:
     runs-on: ubuntu-latest
     steps:
