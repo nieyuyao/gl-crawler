@@ -14,8 +14,8 @@ jobs:
         - 10
         - 12
         - 14
-    uses: actions/checkout@v2.1.0
     steps:
+      uses: actions/checkout@master
     - name: Install
       run: npm install
     - name: Test
