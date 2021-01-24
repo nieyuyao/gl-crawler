@@ -11,7 +11,10 @@ module.exports = function request(options) {
         content += chunk;
       });
       res.on('end', function () {
-        resolve(content);
+        resolve({
+          config: options,
+          content: content
+        });
       });
       res.on('error', function (err) {
         reject(err);
