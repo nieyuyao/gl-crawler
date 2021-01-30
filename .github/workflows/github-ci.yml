@@ -4,10 +4,12 @@
 name: craw ci
 on:
   push:
-    branches: [ master ]
+    branches: [ master ]  
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     strategy:
       matrix:
         node:
@@ -15,6 +17,8 @@ jobs:
         - 12
         - 14
     steps:
+    - name: print npm_token
+      run: echo $NPM_TOKEN
     - name: checkout
       uses: actions/checkout@master
     - name: Install
