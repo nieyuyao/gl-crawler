@@ -1,7 +1,6 @@
 "use strict";
 
 var https = require('https');
-
 module.exports = function request(options) {
   return new Promise(function (resolve, reject) {
     var req = https.request(options, function (res) {
